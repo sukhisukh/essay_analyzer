@@ -1,1 +1,1 @@
-# essay_analyzer
+# Essay Analyzer
