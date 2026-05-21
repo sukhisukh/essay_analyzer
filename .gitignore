@@ -1,0 +1,4 @@
+# Secrets - never commit these
+backend/EssayAnalyzer/appsettings.json
+backend/EssayAnalyzer/appsettings.Development.json
+*.env
