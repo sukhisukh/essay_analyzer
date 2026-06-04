@@ -1,4 +1,8 @@
-# Secrets - never commit these
-backend/EssayAnalyzer/appsettings.json
-backend/EssayAnalyzer/appsettings.Development.json
+# Build output — never commit these
+**/bin/
+**/obj/
+
+# Secrets — never commit these
+**/appsettings.json
+**/appsettings.Development.json
 *.env
