@@ -2,7 +2,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ── Register Services ──────────────────────────────
+// ── Fix port for Azure Linux ──────────────────────
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
+// ── Register Services ─────────────────────────────
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -11,13 +15,18 @@ builder.Services.AddSwaggerGen();
 // Database
 builder.Services.AddDbContext<EssayContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 3,
+            maxRetryDelay: TimeSpan.FromSeconds(5),
+            errorNumbersToAdd: null
+        )
+    ));
 
-// AI Service
-builder.Services.AddHttpClient<EssayService>();
-builder.Services.AddScoped<EssayService>(); 
+// AI Service — only ONE registration needed
+builder.Services.AddHttpClient<EssayService>();  // ← removed AddScoped
 
-// CORS — allow React frontend to call this API
+// CORS
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy =>
         policy
@@ -26,19 +35,14 @@ builder.Services.AddCors(options => {
             .AllowAnyHeader());
 });
 
-// ── Build & Configure Pipeline ─────────────────────
+// ── Build & Configure Pipeline ────────────────────
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Swagger in all environments — needed for testing on Azure
+app.UseSwagger();
+app.UseSwaggerUI();
 
-// ⚠️ CORS must come BEFORE all other middleware
 app.UseCors("AllowAll");
-
-//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
