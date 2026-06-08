@@ -13,4 +13,5 @@ public class CategoryFeedback
     public string? Name { get; set; }
     public int Score { get; set; }
     public string? Feedback { get; set; }
+    
 }
