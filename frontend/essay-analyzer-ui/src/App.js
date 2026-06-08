@@ -6,7 +6,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import ResultsDashboard from './components/ResultsDashboard';
 
 // Your backend API URL — Codespaces forwarded port
-const API_URL = 'https://essay-analyzer-api-d5d6fgfddqfgapgk.westus3-01.azurewebsites.net';
+const API_URL = 'git add .https://essay-analyzer-api-d5d6fgfddqfgapgk.westus3-01.azurewebsites.net';
 
 // Fake results to test UI before real API is connected
 const FAKE_RESULTS = {
