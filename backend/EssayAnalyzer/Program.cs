@@ -38,6 +38,9 @@ builder.Services.AddCors(options => {
 // ── Build & Configure Pipeline ────────────────────
 var app = builder.Build();
 
+// Show detailed errors
+app.UseDeveloperExceptionPage();    // ← ADD THIS
+
 // ⚠️ CORS MUST be first — before everything else
 app.UseCors("AllowAll");
 
