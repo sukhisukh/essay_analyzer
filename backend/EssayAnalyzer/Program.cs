@@ -23,14 +23,14 @@ builder.Services.AddDbContext<EssayContext>(options =>
         )
     ));
 
-// AI Service — only ONE registration needed
-builder.Services.AddHttpClient<EssayService>();  // ← removed AddScoped
+// AI Service
+builder.Services.AddHttpClient<EssayService>();
 
-// CORS
+// CORS — SetIsOriginAllowed bypasses Azure override behavior
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy =>
         policy
-            .AllowAnyOrigin()
+            .SetIsOriginAllowed(_ => true)
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -38,11 +38,13 @@ builder.Services.AddCors(options => {
 // ── Build & Configure Pipeline ────────────────────
 var app = builder.Build();
 
-// Swagger in all environments — needed for testing on Azure
+// ⚠️ CORS MUST be first — before everything else
+app.UseCors("AllowAll");
+
+// Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 
