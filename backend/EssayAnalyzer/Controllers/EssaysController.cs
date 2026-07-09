@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Cors;
 
 [ApiController]
 [Route("api/[controller]")]
-[EnableCors("AllowAll")]
 public class EssaysController : ControllerBase
 {
     private readonly EssayService _essayService;
@@ -16,9 +15,11 @@ public class EssaysController : ControllerBase
     [HttpPost("analyze")]
     public async Task<IActionResult> Analyze([FromBody] EssayRequest request)
     {
-        // Manual CORS header as backup
+        // Manual CORS headers — absolute fallback
         Response.Headers.Append("Access-Control-Allow-Origin", "*");
-        
+        Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type");
+
         if (string.IsNullOrWhiteSpace(request.EssayText))
             return BadRequest("Essay text is required.");
 
@@ -29,11 +30,11 @@ public class EssaysController : ControllerBase
         return Ok(result);
     }
 
-    [HttpOptions("analyze")]    // ← handles preflight request
-    public IActionResult PreflightAnalyze()
+    [HttpOptions("analyze")]
+    public IActionResult Options()
     {
         Response.Headers.Append("Access-Control-Allow-Origin", "*");
-        Response.Headers.Append("Access-Control-Allow-Methods", "POST, OPTIONS");
+        Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type");
         return Ok();
     }
@@ -41,6 +42,7 @@ public class EssaysController : ControllerBase
     [HttpGet("stats")]
     public IActionResult GetStats()
     {
+        Response.Headers.Append("Access-Control-Allow-Origin", "*");
         return Ok(new { message = "Stats endpoint coming soon." });
     }
 }
