@@ -85,8 +85,19 @@ public class EssayService
         var response = await _httpClient.PostAsJsonAsync(
             "https://api.anthropic.com/v1/messages", body);
 
-        var data = await response.Content.ReadFromJsonAsync<AnthropicResponse>();
+        // Log response for debugging
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorBody = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Anthropic API error: {response.StatusCode} - {errorBody}");
+        }
 
+        var data = await response.Content.ReadFromJsonAsync<AnthropicResponse>();
+        // Add this null check
+        if (data?.Content == null || data.Content.Count == 0)
+        {
+            throw new Exception($"Anthropic API returned null or empty response. Status: {response.StatusCode}");
+        }
         var rawText  = data.Content[0].Text;
         var cleanJson = rawText
             .Replace("```json", "")
