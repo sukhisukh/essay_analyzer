@@ -77,7 +77,7 @@ public class EssayService
 
         var body = new
         {
-            model = "claude-sonnet-4-20250514",
+            model = "claude-sonnet-4-6",
             max_tokens = 1000,
             messages = new[] { new { role = "user", content = prompt } }
         };
