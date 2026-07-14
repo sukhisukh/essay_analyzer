@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using EssayAnalyzer.Data;
 using EssayAnalyzer.Models;
 
 namespace EssayAnalyzer.Services
@@ -14,10 +13,10 @@ namespace EssayAnalyzer.Services
 
     public class LicenseService : ILicenseService
     {
-        private readonly ApplicationDbContext _db;
+        private readonly EssayContext _db;
         private readonly ILogger<LicenseService> _logger;
 
-        public LicenseService(ApplicationDbContext db, ILogger<LicenseService> logger)
+        public LicenseService(EssayContext db, ILogger<LicenseService> logger)
         {
             _db = db;
             _logger = logger;
@@ -40,7 +39,6 @@ namespace EssayAnalyzer.Services
             if (school.ExpiryDate.HasValue && school.ExpiryDate.Value < DateTime.UtcNow.Date)
                 return (null, $"Your license expired on {school.ExpiryDate.Value:dd MMM yyyy}. Please renew to continue.");
 
-            // Check monthly usage
             var usage = await GetUsageAsync(school);
             if (usage.LimitReached)
                 return (null, $"Monthly limit of {usage.MonthlyLimit} checks reached ({usage.UsedThisMonth} used). " +
@@ -87,7 +85,6 @@ namespace EssayAnalyzer.Services
 
         public async Task<string> GenerateLicenseKeyAsync(string schoolName)
         {
-            // Generate: SCH-{ABBR}-{RANDOM}
             var abbr = new string(schoolName
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .Select(w => w[0])
