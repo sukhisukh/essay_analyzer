@@ -11,6 +11,8 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient<IAnthropicService, AnthropicService>();
+builder.Services.AddScoped<ILicenseService, LicenseService>();
 
 // Database
 builder.Services.AddDbContext<EssayContext>(options =>
@@ -34,6 +36,18 @@ builder.Services.AddCors(options => {
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ChromeExtension", policy =>
+    {
+        policy.WithOrigins(
+            "chrome-extension://YOUR_EXTENSION_ID_HERE",
+            "https://classroom.google.com"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 // ── Build & Configure Pipeline ────────────────────
 var app = builder.Build();
@@ -43,7 +57,7 @@ app.UseDeveloperExceptionPage();    // ← ADD THIS
 
 // ⚠️ CORS MUST be first — before everything else
 app.UseCors("AllowAll");
-
+app.UseCors("ChromeExtension"); 
 // Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
