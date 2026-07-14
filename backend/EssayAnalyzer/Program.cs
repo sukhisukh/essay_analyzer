@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using EssayAnalyzer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

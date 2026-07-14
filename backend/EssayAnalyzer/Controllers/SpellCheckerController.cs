@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using EssayAnalyzer.Models;
 using EssayAnalyzer.Services;
+using Microsoft.EntityFrameworkCore;
 
-namespace EssayAnalyzer.Controllers
-{
+
     [ApiController]
     [Route("api/[controller]")]
     public class SpellCheckerController : ControllerBase
@@ -233,4 +233,4 @@ namespace EssayAnalyzer.Controllers
 
     public class UpdateLimitRequest { public int NewLimit { get; set; } }
     public class UpdateStatusRequest { public bool IsActive { get; set; } }
-}
+
