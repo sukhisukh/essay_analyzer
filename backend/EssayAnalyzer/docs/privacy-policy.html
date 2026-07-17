@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Handwriting Spell Checker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f9f9f7;
+    color: #2d2d2d;
+    line-height: 1.7;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 48px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #e8623a;
+  }
+  .logo {
+    width: 40px; height: 40px;
+    background: #e8623a;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+  }
+  .app-name { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+  .app-sub  { font-size: 12px; color: #888; }
+  h1 { font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .updated { font-size: 12px; color: #888; margin-bottom: 32px; }
+  h2 {
+    font-size: 15px; font-weight: 700;
+    color: #e8623a;
+    margin: 28px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  p { font-size: 14px; color: #444; margin-bottom: 12px; }
+  ul { padding-left: 20px; margin-bottom: 12px; }
+  li { font-size: 14px; color: #444; margin-bottom: 6px; }
+  .highlight {
+    background: #fff8f5;
+    border-left: 3px solid #e8623a;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #444;
+  }
+  .contact-card {
+    background: #f5f5f3;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #444;
+  }
+  .contact-card a { color: #e8623a; text-decoration: none; }
+  .contact-card a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="logo-row">
+    <div class="logo">&#9998;</div>
+    <div>
+      <div class="app-name">Handwriting Spell Checker</div>
+      <div class="app-sub">For Marathi language classrooms</div>
+    </div>
+  </div>
+
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: July 2025</div>
+
+  <div class="highlight">
+    <strong>Summary:</strong> We do not sell your data. Student work images are processed by AI for spell checking and are never stored on our servers. Teacher corrections are saved only to your own Google Sheet if you configure one.
+  </div>
+
+  <h2>1. Who We Are</h2>
+  <p>Handwriting Spell Checker is a Chrome Extension built for primary school teachers of marathi language to check spelling and grammar in handwritten student work submitted via Google Classroom. The extension is developed and maintained as an independent product.</p>
+
+  <h2>2. What Data We Access</h2>
+  <p>The extension requests access to the following Google services:</p>
+  <ul>
+    <li><strong>Google Classroom</strong> — to read your courses, assignments, and student submissions (read-only). We never create, modify, or delete any Classroom content.</li>
+    <li><strong>Google Drive</strong> — to read image files that students have attached to their submissions (read-only).</li>
+    <li><strong>Google Sheets</strong> — only if you choose to configure a School Dictionary Sheet. Used to read and write correction history for the learning layer.</li>
+    <li><strong>Google Account (email)</strong> — to identify you as the logged-in teacher. Your email is not shared with any third party.</li>
+  </ul>
+
+  <h2>3. How Student Data Is Handled</h2>
+  <p>Student handwriting images are sent to the Anthropic Claude AI API solely for the purpose of optical character recognition (OCR) and spell checking. We handle student data as follows:</p>
+  <ul>
+    <li>Images are transmitted securely over HTTPS and are <strong>not stored</strong> on any server controlled by us.</li>
+    <li>Anthropic processes images in accordance with their own privacy policy at <a href="https://www.anthropic.com/privacy" style="color:#e8623a;">anthropic.com/privacy</a>.</li>
+    <li>Student names are displayed within the extension only and are <strong>not sent</strong> to any external service.</li>
+    <li>Spell check results (corrections) are stored only in your browser's local storage and optionally in your school's Google Sheet.</li>
+  </ul>
+
+  <h2>4. What We Store Locally</h2>
+  <p>The extension stores the following in your Chrome browser's sync storage:</p>
+  <ul>
+    <li>Your school license key</li>
+    <li>Your optional Google Sheets ID for the school dictionary</li>
+    <li>Your monthly usage count</li>
+  </ul>
+  <p>This data never leaves your Chrome profile except to sync across your own signed-in Chrome devices.</p>
+
+  <h2>5. School Dictionary / Learning Layer</h2>
+  <p>If you configure a Google Sheet as a School Dictionary, the extension writes correction history (wrong word, correct word, error type, teacher verdict, and optional teacher note) to that Sheet. This Sheet is owned and controlled entirely by you. We do not have access to it.</p>
+
+  <h2>6. License Key and Usage</h2>
+  <p>If your school uses a license key, usage counts (number of checks performed per month) are recorded on our backend server to enforce monthly limits. No student data, images, or personal information are transmitted as part of usage logging — only the license key and check count.</p>
+
+  <h2>7. Data Sharing</h2>
+  <p>We do not sell, rent, or share any personal data with third parties for advertising or marketing purposes. Data is shared only with:</p>
+  <ul>
+    <li><strong>Anthropic</strong> — for AI processing of handwriting images (no personal identifiers included)</li>
+    <li><strong>Google</strong> — via standard Google API calls initiated by you as the authenticated user</li>
+  </ul>
+
+  <h2>8. Data Retention</h2>
+  <p>We do not retain student images or spell check results. Usage logs on our server retain only license key and monthly count, which are reset each month. You can request deletion of any data associated with your license key by contacting us.</p>
+
+  <h2>9. Children's Privacy</h2>
+  <p>This extension is used by teachers, not directly by students. Student handwriting images are processed but not stored, and no student accounts or profiles are created. We comply with applicable student data privacy laws including India's DPDP Act 2023.</p>
+
+  <h2>10. Security</h2>
+  <p>All data transmissions use HTTPS encryption. API keys and license keys are stored in Chrome's encrypted sync storage. We follow security best practices including not logging sensitive data and using short-lived authentication tokens.</p>
+
+  <h2>11. Your Rights</h2>
+  <p>As a teacher using this extension, you have the right to:</p>
+  <ul>
+    <li>Access what data is stored in your Chrome sync storage (visible in Chrome settings)</li>
+    <li>Delete your School Dictionary Sheet at any time</li>
+    <li>Uninstall the extension at any time, which removes all local data</li>
+    <li>Request deletion of usage logs associated with your school's license key</li>
+  </ul>
+
+  <h2>12. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. The updated date at the top of this page will reflect any changes. Continued use of the extension after changes constitutes acceptance of the updated policy.</p>
+
+  <h2>13. Contact</h2>
+  <p>For any privacy-related questions, requests, or concerns:</p>
+  <div class="contact-card">
+    <strong>Handwriting Spell Checker</strong><br>
+    Email: <a href="mailto:sukhadasdeshpande@gmail.com">sukhadasdeshpande@gmail.com</a><br><br>
+    We will respond to all privacy requests within 7 business days.
+  </div>
+
+  <footer>
+    &copy; 2025 Handwriting Spell Checker &nbsp;&middot;&nbsp; Built for Marathi language classrooms
+  </footer>
+
+</div>
+</body>
+</html>
