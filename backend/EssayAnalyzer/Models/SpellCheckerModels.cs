@@ -124,6 +124,17 @@ namespace EssayAnalyzer.Models
         public UsageSummary? Usage { get; set; }
     }
 
+    public class OcrRequest
+    {
+        [Required]
+        public string LicenseKey { get; set; } = string.Empty;
+        [Required]
+        public string ImageBase64 { get; set; } = string.Empty;
+        [Required]
+        public string MimeType { get; set; } = "image/jpeg";
+        [Required]
+        public string Language { get; set; } = "Marathi";
+    }
     // ── Admin DTOs ───────────────────────────────────────────────
 
     public class CreateSchoolRequest

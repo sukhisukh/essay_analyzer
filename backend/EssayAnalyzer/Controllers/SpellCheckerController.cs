@@ -64,6 +64,28 @@ namespace EssayAnalyzer.Controllers
             }
         }
 
+        [HttpPost("ocr")]
+        public async Task<ActionResult> OcrOnly([FromBody] OcrRequest request)
+        {
+            var (school, licenseError) = await _licenseService.ValidateLicenseAsync(request.LicenseKey);
+            if (school == null)
+                return Ok(new { success = false, error = licenseError });
+
+            try
+            {
+                var labeledText = await _anthropicService.OcrImageAsync(
+                    school.AnthropicApiKey, request.ImageBase64, request.MimeType, request.Language);
+
+                var ocrText = System.Text.RegularExpressions.Regex
+                    .Replace(labeledText, @"LINE_\d+:\s*", "").Trim();
+
+                return Ok(new { success = true, ocrText = ocrText, labeledText = labeledText });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { success = false, error = ex.Message });
+            }
+        }
         // GET /api/spellchecker/license/{key}
         [HttpGet("license/{licenseKey}")]
         public async Task<ActionResult<LicenseCheckResponse>> CheckLicense(string licenseKey)
